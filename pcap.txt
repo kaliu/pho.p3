@@ -1,0 +1,16 @@
+1. Packets sent on the local network are packets with 10.0.X.X IP addresses
+IP Address	MAC Address
+10.0.2.1	00:26:08:e5:66:07
+10.0.2.2	04:0c:ce:d8:0f:fa
+10.0.2.3	8c:a9:82:50:f0:a6
+
+2. Each interaction in this network trace has an endpoint in the local network, which indicates that it may be a router; every packet analyzed is either going out from a local host or coming into a local host.
+
+3.
+a) By filtering for FTP and then filtering for DNS, we can find the request for the IP resolution.  The hostname of the site is download.xs4all.nl.
+
+b) THe connection uses passive FTP.  The client uses port 50952 in all its ftp interactions.  Prior to any data being sent across the network, the client first sends a request to the server from that port, telling it to connect to this port.  If the server had sent data to port 50952 first, it would have used active FTP.
+
+c) The bytes transferred are in plaintext; anyone who sniffs the bytes can read the content.  For example, in the given network trace, we can see that the client tried to log in with username laticia.langhans and password goblue3859.
+
+d) Secure File Transfer Protocol (SFTP) and Secure Copy (SCP) are protocols that use SSH when transferring data, and thus are assumed to provide authentication and confidentiality.
